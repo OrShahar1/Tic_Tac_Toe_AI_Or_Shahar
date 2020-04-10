@@ -1,0 +1,246 @@
+import unittest
+import or_game_AI as t
+x = t.Game()
+
+class Test_tic_tac_toe(unittest.TestCase):
+
+    def test_game_start(self):
+        # test game object construct
+        #x = t.Game()
+        self.assertEqual(len(x.board), 9)
+        self.assertEqual(x.player1.sign_board, "X")
+        self.assertEqual(x.player2.sign_board, "O")
+        self.assertEqual(x.player1.human_or_AI, "person")
+        self.assertEqual(x.player2.human_or_AI, "computer")# or person ! check both
+
+    def test_player_start(self):
+        # test player object construct
+        #x = t.Game()
+        self.assertEqual(x.player1.sign_board, "X")
+        self.assertEqual(x.player2.sign_board, "O")
+        self.assertEqual(x.player1.human_or_AI, "person")
+        self.assertEqual(x.player2.human_or_AI, "computer")# or person ! check both
+
+    def test_draw(self):
+        # checking the game print graw
+        #x = t.Game()
+        x.board = ["X", "X", "X", " ", " ", " ", " ", " ", " "]
+        x.draw_board()
+        x.board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+        x.draw_board()
+        x.board = ["O", "O", "O", "O", "O", "O", "O", "O", "O"]
+        x.draw_board()
+
+    def test_print_law(self):
+        #x = t.Game()
+        x.print_law()
+
+    def test_game_finish(self):
+        # winners X =((0,1,2),(3,4,5),(6,7,8),(0,3,6),(1,4,7),(2,5,8),(0,4,8),(2,4,6))
+        #x=t.Game()
+        new1 = ["X", "X", "X", " ", " ", " ", " ", " ", " "]
+        new2 = [" ", " ", " ", "X", "X", "X", " ", " ", " "]
+        new3 = [" ", " ", " ", " ", " ", " ", "X", "X", "X"]
+        new4 = ["X", " ", " ", "X", " ", " ", "X", " ", " "]
+        new5 = [" ", "X", " ", " ", "X", " ", " ", "X", " "]
+        new6 = [" ", " ", "X", " ", " ", "X", " ", " ", "X"]
+        new7 = ["X", " ", " ", " ", "X", " ", " ", " ", "X"]
+        new8 = [" ", " ", "X", " ", "X", " ", "X", " ", " "]
+        self.assertEqual(x.finish(new1), "X")
+        self.assertEqual(x.finish(new2), "X")
+        self.assertEqual(x.finish(new3), "X")
+        self.assertEqual(x.finish(new4), "X")
+        self.assertEqual(x.finish(new5), "X")
+        self.assertEqual(x.finish(new6), "X")
+        self.assertEqual(x.finish(new7), "X")
+        self.assertEqual(x.finish(new8), "X")
+        # winners O =((0,1,2),(3,4,5),(6,7,8),(0,3,6),(1,4,7),(2,5,8),(0,4,8),(2,4,6))
+        new1 = ["O", "O", "O", " ", " ", " ", " ", " ", " "]
+        new2 = [" ", " ", " ", "O", "O", "O", " ", " ", " "]
+        new3 = [" ", " ", " ", " ", " ", " ", "O", "O", "O"]
+        new4 = ["O", " ", " ", "O", " ", " ", "O", " ", " "]
+        new5 = [" ", "O", " ", " ", "O", " ", " ", "O", " "]
+        new6 = [" ", " ", "O", " ", " ", "O", " ", " ", "O"]
+        new7 = ["O", " ", " ", " ", "O", " ", " ", " ", "O"]
+        new8 = [" ", " ", "O", " ", "O", " ", "O", " ", " "]
+        self.assertEqual(x.finish(new1), "O")
+        self.assertEqual(x.finish(new2), "O")
+        self.assertEqual(x.finish(new3), "O")
+        self.assertEqual(x.finish(new4), "O")
+        self.assertEqual(x.finish(new5), "O")
+        self.assertEqual(x.finish(new6), "O")
+        self.assertEqual(x.finish(new7), "O")
+        self.assertEqual(x.finish(new8), "O")
+        # important case
+        new1 = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+        self.assertEqual(x.finish(new1), 0)
+        new1 = ["O", "X","O", "O", "X", "X", "X", "O", "O"]
+        new2 = ["X", "O","X", "O", "O", "X", "X", "X", "O"]
+        new3 = ["O", "X","X", "X", "X", "O", "O", "O", "X"]
+        new4 = ["O", "X","O", "X", "X", "O", "O", "O", "X"]
+        self.assertEqual(x.finish(new1), 0)
+        self.assertEqual(x.finish(new2), 0)
+        self.assertEqual(x.finish(new3), 0)
+        self.assertEqual(x.finish(new4), 0)
+
+    def test_player_evaluate(self):
+        # winners O =((0,1,2),(3,4,5),(6,7,8),(0,3,6),(1,4,7),(2,5,8),(0,4,8),(2,4,6))
+        #x = t.Game()
+        x.board = ["X", "X", "X", " ", " ", " ", " ", " ", " "]
+        self.assertEqual(x.player1.eavluate(x), -1)
+        x.board = [" ", " ", " ", "X", "X", "X", " ", " ", " "]
+        self.assertEqual(x.player1.eavluate(x), -1)
+        x.board = [" ", " ", " ", " ", " ", " ", "X", "X", "X"]
+        self.assertEqual(x.player1.eavluate(x), -1)
+        x.board = ["X", " ", " ", "X", " ", " ", "X", " ", " "]
+        self.assertEqual(x.player1.eavluate(x), -1)
+        x.board = [" ", "X", " ", " ", "X", " ", " ", "X", " "]
+        self.assertEqual(x.player1.eavluate(x), -1)
+        x.board = [" ", " ", "X", " ", " ", "X", " ", " ", "X"]
+        self.assertEqual(x.player1.eavluate(x), -1)
+        x.board = ["X", " ", " ", " ", "X", " ", " ", " ", "X"]
+        self.assertEqual(x.player1.eavluate(x), -1)
+        x.board = [" ", " ", "X", " ", "X", " ", "X", " ", " "]
+        self.assertEqual(x.player1.eavluate(x), -1)
+        # for player 2
+        x.board = ["O", "O", "O", " ", " ", " ", " ", " ", " "]
+        self.assertEqual(x.player2.eavluate(x), +1)
+        x.board = [" ", " ", " ", "O", "O", "O", " ", " ", " "]
+        self.assertEqual(x.player2.eavluate(x), +1)
+        x.board = [" ", " ", " ", " ", " ", " ", "O", "O", "O"]
+        self.assertEqual(x.player2.eavluate(x), +1)
+        x.board = ["O", " ", " ", "O", " ", " ", "O", " ", " "]
+        self.assertEqual(x.player2.eavluate(x), +1)
+        x.board = [" ", "O", " ", " ", "O", " ", " ", "O", " "]
+        self.assertEqual(x.player2.eavluate(x), +1)
+        x.board = [" ", " ", "O", " ", " ", "O", " ", " ", "O"]
+        self.assertEqual(x.player2.eavluate(x), +1)
+        x.board = ["O", " ", " ", " ", "O", " ", " ", " ", "O"]
+        self.assertEqual(x.player2.eavluate(x), +1)
+        x.board = [" ", " ", "O", " ", "O", " ", "O", " ", " "]
+        self.assertEqual(x.player2.eavluate(x), +1)
+        #important case- no winner and base case
+        x.board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+        self.assertEqual(x.player2.eavluate(x), 0)
+        x.board = ["O", "X", "O", "O", "X", "X", "X", "O", "O"]
+        self.assertEqual(x.player2.eavluate(x), 0)
+        x.board = ["X", "O", "X", "O", "O", "X", "X", "X", "O"]
+        self.assertEqual(x.player2.eavluate(x), 0)
+        x.board = ["O", "X", "X", "X", "X", "O", "O", "O", "X"]
+        self.assertEqual(x.player2.eavluate(x), 0)
+        x.board = ["O", "X", "O", "X", "X", "O", "O", "O", "X"]
+        self.assertEqual(x.player2.eavluate(x), 0)
+
+        def test_player_avlispots(self):
+            #x = t.Game()
+            x.board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+            self.assertEqual(len(x.player1.eavluate(x.board)), 9)
+            x.board = ["X", " ", " ", " ", " ", " ", " ", " ", " "]
+            self.assertEqual(len(x.player1.eavluate(x.board)), 8)
+            x.board = ["X", "X", " ", " ", " ", " ", " ", " ", " "]
+            self.assertEqual(len(x.player1.eavluate(x.board)), 7)
+            x.board = ["X", "X", "X", " ", " ", " ", " ", " ", " "]
+            self.assertEqual(len(x.player1.eavluate(x.board)), 6)
+            x.board = ["X", "X", "X", "X", " ", " ", " ", " ", " "]
+            self.assertEqual(len(x.player1.eavluate(x.board)), 5)
+            x.board = ["X", "X", "X", "O", "O", " ", " ", " ", " "]
+            self.assertEqual(len(x.player1.eavluate(x.board)), 4)
+            x.board = ["X", "X", "X", "O", "O", "X", " ", " ", " "]
+            self.assertEqual(len(x.player1.eavluate(x.board)), 3)
+            x.board = ["X", "X", "X", "O", "O", "O", "X", " ", " "]
+            self.assertEqual(len(x.player1.eavluate(x.board)), 2)
+            x.board = ["X", "X", "X", "O", "O", "O", "X", "X", " "]
+            self.assertEqual(len(x.player1.eavluate(x.board)), 1)
+            x.board = ["X", "X", "X", "O", "O", "O", "X", "X", "O"]
+            self.assertEqual(len(x.player1.eavluate(x.board)), 0)
+
+            x.board = ["O", "X", " ", "X", "O", " ", "X", "O", " "]
+            self.assertEqual(len(x.player1.eavluate(x.board)), 3)
+            x.board = ["X", "X", "X", "O", " ", "X", " ", "X", "X"]
+            self.assertEqual(len(x.player1.eavluate(x.board)), 2)
+            x.board = ["O", "X", "O", " ", " ", " ", " ", "O", "O"]
+            self.assertEqual(len(x.player1.eavluate(x.board)), 5)
+            x.board = [" ", "X", "X", "O", " ", "O", " ", " ", " "]
+            self.assertEqual(len(x.player1.eavluate(x.board)), 5)
+            x.board = ["X", "O", "X", "X", "O", "O", " ", " ", " "]
+            self.assertEqual(len(x.player1.eavluate(x.board)), 5)
+            x.board = ["X", "X", "X", "O", " ", "O", "O", " ", " "]
+            self.assertEqual(len(x.player1.eavluate(x.board)), 3)
+            x.board = [" ", "X", "X", "O", "O", "X", " ", " ", " "]
+            self.assertEqual(len(x.player1.eavluate(x.board)), 4)
+            x.board = [" ", "X", "X", "O", "O", "O", "X", " ", " "]
+            self.assertEqual(len(x.player1.eavluate(x.board)), 3)
+            x.board = [" ", " ", "X", "O", "O", "O", "X", "X", " "]
+            self.assertEqual(len(x.player1.eavluate(x.board)), 3)
+            x.board = ["X", " ", " ", "O", "O", "O", "X", "X", "O"]
+            self.assertEqual(len(x.player1.eavluate(x.board)), 2)
+
+        # test minimax moves
+    def test_player_gamemove(self):
+        #x = t.Game()
+        x.board =  ["X", " ", " ",
+                    " ", " ", " ",
+                    " ", " ", " "]
+        x.player1 =  t.Player("X", "person")
+        self.player2 = t.Player("O", "computer")
+
+        self.assertEqual(t.Player("O", "computer").get_move(x), 4)
+        
+        x.board = [" ", " ", " ",
+                   "X", " ", " ",
+                   " ", " ", " "]
+        self.assertEqual(t.Player("O", "computer").get_move(x), 0)
+
+        x.board = ["X", " ", " ",
+                   "X", "O", " ",
+                   " ", " ", " "]
+        self.assertEqual(t.Player("O", "computer").get_move(x), 6)
+
+        x.board = ["O", "X", "X",
+                   " ", "O", "X",
+                   " ", " ", " "]
+        self.assertEqual(t.Player("O", "computer").get_move(x), 8)
+
+        x.board = [" ", " ", "X",
+                   " ", "O", "X",
+                   " ", "X", "O"]
+        self.assertEqual(t.Player("O", "computer").get_move(x), 0)
+
+        x.board = ["X", "X", "O",
+                   "X", "O", " ",
+                   " ", " ", " "]
+        self.assertEqual(t.Player("O", "computer").get_move(x), 6)
+
+        x.board = ["O", "X", " ",
+                   "X", "X", "O",
+                   " ", " ", " "]
+        self.assertEqual(t.Player("O", "computer").get_move(x), 7)
+
+        x.board = ["X", "O", "X",
+                   " ", "O", " ",
+                   " ", "X", " "]
+        self.assertEqual(t.Player("O", "computer").get_move(x), 3)
+
+        x.board = ["X", "O", "X",
+                   "O", "O", " ",
+                   "X", "X", " "]
+        self.assertEqual(t.Player("O", "computer").get_move(x), 5)
+
+        x.board = ["O", " ", "X",
+                   "O", "X", " ",
+                   " ", "X", " "]
+        self.assertEqual(t.Player("O", "computer").get_move(x), 6)
+
+    def test_player_run(self):
+        #x = t.Game()
+        new1=[" ", " ", " "," ", " ", " "," ", " ", " "]
+        self.assertEqual(x.run(new1), 0)
+        new2 = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+        self.assertEqual(x.run(new2), 0)
+        new3 = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+        self.assertEqual(x.run(new3), 0)
+        new4 = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+        self.assertEqual(x.run(new4), 0)
+
+if __name__ == '__main__':
+    unittest.main()
