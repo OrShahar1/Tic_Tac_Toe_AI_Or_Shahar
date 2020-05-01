@@ -9,6 +9,7 @@ How to run?
 
 3. Start playing by the instructions
 
+![](download.png)
 
 
 
@@ -22,4 +23,3 @@ How to run?
 •Work with Design patterns
 
 
-![](download.png)
