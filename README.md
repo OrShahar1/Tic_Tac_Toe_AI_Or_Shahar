@@ -3,7 +3,7 @@
 
 How to run?
 
-1. Download
+1. Download game.py
 
 2. Select the game mode - against the computer (minimax) \ against a friend
 
