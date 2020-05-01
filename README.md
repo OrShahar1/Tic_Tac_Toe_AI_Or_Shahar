@@ -1,13 +1,19 @@
-# Tic_Tac_Toe_AI_Or_Shahar
+# Tic Tac Toe AI 
+# Done with minimax algorithms
+
+How to run?
+
+1. Download
+
+2. Select the game mode - against the computer (minimax) \ against a friend
+
+3. Start playing by the instructions
 
 
 
 
 
-
-
-
-•With artificial intelligence algorithm
+•With lite artificial intelligence algorithm
 
 •Full testing environment
 
